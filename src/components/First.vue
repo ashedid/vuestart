@@ -2,7 +2,7 @@
   <h3>
     template grammar
   </h3>
-  <p :id :class="sclass" :title="stitle">{{ msg }}</p>
+  <p :class="sclass" :title="stitle">{{ msg }}</p>
   <!--  attrs bind 同名简写 vue 3.4-->
   <p v-bind="objectOfAttrs">{{ num + 1 }}</p>
   <p>{{ ok ? num + 1 : 0 }}</p>
@@ -23,15 +23,19 @@
   <button @click="addListItem">add data</button>
   <ul>
 
-    <!--    <li v-for="(item,index) in array" :key="item.id" @click="add('mess',$event)">{{ item.name }} :-->
-    <!--      {{ item.score }}&#45;&#45;{{ index }}-->
-    <!--    </li>-->
+
     <li v-for="(item,index) in array2" key="index">
       {{ item }}
     </li>
 
   </ul>
 
+  <span v-for="n in 10" :style="{fontSize:'50px',color:'purple'}">{{n}}</span>
+<!--  v-for range-->
+
+  <div v-for="({score,id,name},index) in array" :key="id" @click="add('mess',$event)">{{ name }} :
+    {{ score }}--{{ index }}
+  </div>
   <p v-for="(item,key,index) of userInfo">{{ item }}--{{ index }}--{{ key }}</p>
   <div @click="clickDiv">
 
@@ -50,6 +54,8 @@
   <p :style="{color:activeColor,fontSize:fontSize+'px'}">style color</p>
   <p :style="styleObject">style color</p>
   <p :style="[styleObject]">style color</p>
+
+  <p>first end==============================================================================================================================================================================</p>
 </template>
 
 <script>
@@ -62,7 +68,7 @@ export default {
       num: 23,
       ok: true,
       rawHTML: "<p>something</p>",
-      id: 'usa',
+
       sclass: "someclass",
       stitle: null || undefined || 'cla',
       sdisabled: false,

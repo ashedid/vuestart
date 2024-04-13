@@ -67,28 +67,49 @@ const publishedBooksMessage = computed(() => {
 })
 console.log(publishedBooksMessage.value)
 
+
+const isActive = ref(true)
+const error = ref(null)
+
+const classObject = computed(() => ({
+  active: isActive.value && !error.value,
+  'text-danger': error.value && error.value.type === 'fatal'
+}))
+
+
+const activeClass = ref('active')
+const errorClass = ref('text-danger')
 </script>
 
 <template>
-  <div>{{ count }}</div>
-  <button @click="increment">
-    {{ count }}
-  </button>
-  <button @click="state.count++">
-    {{ state.count }}
-  </button>
-  <div>{{ object.id + 1 }}</div>
-  <!--  非顶级不解包-->
-  <div>{{ id + 1 }}</div>
-  <!--  解构语法 解包-->
+<!--  <div>-->
+
+    <div>{{ count }}</div>
+    <button @click="increment">
+      {{ count }}
+    </button>
+    <button @click="state.count++">
+      {{ state.count }}
+    </button>
+    <div :class="$attrs.class">{{ object.id + 1 }}</div>
+<!--  接受上级class 透传 Attribute-->
+    <!--  非顶级不解包-->
+    <div>{{ id + 1 }}</div>
+    <!--  解构语法 解包-->
 
 
-  <div>{{ object.id }}</div>
-  <!--  文本插值 ===   {{ object.id.value }} -->
+    <div>{{ object.id }}</div>
+    <!--  文本插值 ===   {{ object.id.value }} -->
 
 
-  <p>Has published books:</p>
-  <span>{{ publishedBooksMessage }}</span>
+    <p>Has published books:</p>
+    <span>{{ publishedBooksMessage }}</span>
+
+    <div :class="[activeClass, errorClass]"></div>
+    <!--  数组-->
+    <div :class="classObject"></div>
+    <!--对象-->
+<!--  </div>-->
 </template>
 
 <style scoped>

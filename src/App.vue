@@ -1,6 +1,6 @@
 <template>
-<!--  <First/>-->
-  <Second/>
+  <First/>
+  <Second class="active"/>
 </template>
 
 
