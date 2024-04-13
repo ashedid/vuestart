@@ -36,6 +36,10 @@
 
     <a @click.prevent.stop="clickHandler" href="https://discord.com">dcard</a><!-- 时间修饰符-->
   </div>
+
+  <h3>{{ dixiashi.name }}</h3>
+  <p>{{ dxsContant }}</p>
+
 </template>
 
 <script>
@@ -72,6 +76,12 @@ export default {
         score: 99
       },
 
+      dixiashi: {
+        name: "sck",
+        contant: ["klmzfxd", "dxssj", "zyf"]
+      }
+
+
     }
 
   },
@@ -95,12 +105,16 @@ export default {
     addListItem() { //数组变化侦测
       //this.array2.push('d') //auto UI update | one of 变更方法
       this.array2 = this.array2.concat(['d']) //no auto UI update | one of 替换方法 {filter, slice..}
-      this.array2=this.array2.concat(this.array)
+      this.array2 = this.array2.concat(this.array)
       console.log(this.array2)
     }
   },
 
-
+  computed: { //计算属性
+    dxsContant() {
+      return this.dixiashi.contant.length > 0 ? 'yes' : 'no'
+    }
+  }
 }
 </script>
 
