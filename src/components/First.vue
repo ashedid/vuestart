@@ -31,7 +31,7 @@
   </ul>
 
   <span v-for="n in 10" :style="{fontSize:'50px',color:'purple'}">{{n}}</span>
-<!--  v-for range-->
+<!--  v-for range ,start at 1 -->
 
   <div v-for="({score,id,name},index) in array" :key="id" @click="add('mess',$event)">{{ name }} :
     {{ score }}--{{ index }}
