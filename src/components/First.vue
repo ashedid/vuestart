@@ -41,9 +41,14 @@
   <p>{{ dxsContant }}</p>
 
   <h3 :class="{'active':isActive}">class attr</h3>
-<!--  //class 样式绑定-->
+  <!--  //class 样式绑定-->
   <h3 :class="[isActive,{'active':isActive}]">class attr</h3>
-<!--  //class 样式绑定 array-->
+  <!--  //class 样式绑定 array-->
+
+
+  <p :style="{color:activeColor,fontSize:fontSize+'px'}">style color</p>
+  <p :style="styleObject">style color</p>
+  <p :style="[styleObject]">style color</p>
 </template>
 
 <script>
@@ -85,7 +90,12 @@ export default {
         contant: ["klmzfxd", "dxssj", "zyf"]
       },
 
-      isActive: true
+      isActive: true,
+      activeColor: 'aqua',
+      fontSize: 40,
+      styleObject:
+          {color: 'azure', fontSize: '40px'}
+
     }
 
   },
