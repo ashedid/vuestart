@@ -2,7 +2,8 @@
   <h3>
     template grammar
   </h3>
-  <p :id="sid" :class="sclass" :title="stitle">{{ msg }}</p>
+  <p :id :class="sclass" :title="stitle">{{ msg }}</p>
+  <!--  attrs bind 同名简写 vue 3.4-->
   <p v-bind="objectOfAttrs">{{ num + 1 }}</p>
   <p>{{ ok ? num + 1 : 0 }}</p>
   <p>{{ msg.split('').reverse().join('') }}</p>
@@ -61,7 +62,7 @@ export default {
       num: 23,
       ok: true,
       rawHTML: "<p>something</p>",
-      sid: 'usa',
+      id: 'usa',
       sclass: "someclass",
       stitle: null || undefined || 'cla',
       sdisabled: false,
@@ -100,6 +101,7 @@ export default {
 
   },
   methods: {
+    // 箭头函数没有自己的 this 不可使用箭头
     add(msg, e) {
       this.buttoncount++
       console.log(e.target.innerHTML)
@@ -123,7 +125,11 @@ export default {
       console.log(this.array2)
     }
   },
-
+  watch: {
+    msg(newValue, oldValue) { // 侦听器
+      console.log(newValue, oldValue)
+    }
+  },
   computed: { //计算属性
     dxsContant() {
       return this.dixiashi.contant.length > 0 ? 'yes' : 'no'
