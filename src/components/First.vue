@@ -40,6 +40,10 @@
   <h3>{{ dixiashi.name }}</h3>
   <p>{{ dxsContant }}</p>
 
+  <h3 :class="{'active':isActive}">class attr</h3>
+<!--  //class 样式绑定-->
+  <h3 :class="[isActive,{'active':isActive}]">class attr</h3>
+<!--  //class 样式绑定 array-->
 </template>
 
 <script>
@@ -79,9 +83,9 @@ export default {
       dixiashi: {
         name: "sck",
         contant: ["klmzfxd", "dxssj", "zyf"]
-      }
+      },
 
-
+      isActive: true
     }
 
   },
@@ -123,5 +127,10 @@ export default {
 .someclass {
   color: aqua;
   font-size: 30px;
+}
+
+.active {
+  color: aquamarine;
+  font-size: 40px;
 }
 </style>
