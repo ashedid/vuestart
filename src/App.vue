@@ -1,10 +1,10 @@
 <template>
   <!-- <First />
-  <Second class="active" />
-  <TodoList /> -->
+  <Second class="active" />  -->
+  <!-- <TodoList /> -->
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
-  <TemplateRefs />
+  <ButtonCounts />
 </template>
 
 
@@ -17,7 +17,9 @@
 
 // import LifeCycle from './components/LifeCycle.vue'
 // import WatchEffectDemo  from './components/WatchEffectDemo.vue'
-import TemplateRefs from './components/TemplateRefs.vue'
+// import TemplateRefs from './components/TemplateRefs.vue'
+// import ComponentBasics from './components/ComponentBasics.vue'
+import ButtonCounts from './components/ButtonCounts.vue'
 
 </script>
 <style></style>

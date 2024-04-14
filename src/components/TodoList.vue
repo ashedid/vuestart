@@ -29,12 +29,12 @@ function addNewTodo() {
 <template>
   <form v-on:submit.prevent="addNewTodo">
     <label for="new-todo">Add a todo</label>
-    <input
+    <el-input type=""
         v-model="newTodoText"
         id="new-todo"
         placeholder="E.g. Feed the cat"
     />
-    <button>Add</button>
+    <el-button>Add</el-button>
   </form>
   <ul>
     <li
@@ -43,7 +43,7 @@ function addNewTodo() {
         :title="todo.title"
 
     > {{ todo.title }}
-      <button @click="todos.splice(index, 1)">Remove</button>
+      <el-button @click="todos.splice(index, 1)">Remove</el-button>
     </li>
   </ul>
 </template>
