@@ -1,14 +1,16 @@
 <script setup>
 import ButtonCounter from './ButtonCounter.vue';
 import TodoList from './TodoList.vue';
-import { ref } from 'vue'
+import { ref ,computed} from 'vue'
 const count = ref(0)
 const currentTab = ref('ButtonCounter')
+const props = defineProps(['size'])
 
-
-const tabs = {
-    ButtonCounter, TodoList
-}
+// 该 prop 变更时计算属性也会自动更新
+// const normalizedSize = computed(() => props.size.toLowerCase())
+// const tabs = {
+//     ButtonCounter, TodoList
+// }
 </script>
 
 <template>
@@ -24,7 +26,9 @@ const tabs = {
         <component :is="tabs[currentTab]" class="tab" :count="count">
         </component>
     </div>
-
+    <div :divSize="normalizedSize">
+        {{ normalizedSize }}
+    </div>
     <!-- </KeepAlive> -->
     <!-- universal component props ref import auto-->
 
