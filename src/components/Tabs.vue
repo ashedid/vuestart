@@ -5,25 +5,30 @@ import { ref } from 'vue'
 const count = ref(0)
 const currentTab = ref('ButtonCounter')
 
+
 const tabs = {
     ButtonCounter, TodoList
 }
 </script>
 
 <template>
+
     <div class="demo">
         <button v-for="(_, tab) in tabs" :key="tab" :class="['tab-button', { active: currentTab === tab }]"
             @click="currentTab = tab">
             {{ tab }}
         </button>
-        <KeepAlive>
 
-            <component :is="tabs[currentTab]" class="tab" :count="count"></component>
+        <!-- <KeepAlive> -->
 
-        </KeepAlive>
-        <!-- universal component props ref import auto-->
-
+        <component :is="tabs[currentTab]" class="tab" :count="count">
+        </component>
     </div>
+
+    <!-- </KeepAlive> -->
+    <!-- universal component props ref import auto-->
+
+
 </template>
 
 <style>
