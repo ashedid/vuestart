@@ -4,7 +4,7 @@
   <TodoList /> -->
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
-  <LifeCycle/>
+  <WatchEffectDemo />
 </template>
 
 
@@ -15,7 +15,8 @@
 // import First from "@/components/First.vue";
 // import Second from "@/components/Second.vue";
 
-import LifeCycle from './components/LifeCycle.vue'
+// import LifeCycle from './components/LifeCycle.vue'
+import WatchEffectDemo  from './components/WatchEffectDemo.vue'
 
 
 </script>
