@@ -4,7 +4,7 @@
   <!-- <TodoList /> -->
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
-  <ButtonCounts />
+  <Tabs />
 </template>
 
 
@@ -19,7 +19,7 @@
 // import WatchEffectDemo  from './components/WatchEffectDemo.vue'
 // import TemplateRefs from './components/TemplateRefs.vue'
 // import ComponentBasics from './components/ComponentBasics.vue'
-import ButtonCounts from './components/ButtonCounts.vue'
+import Tabs from './components/Tabs.vue'
 
 </script>
 <style></style>
