@@ -12,7 +12,7 @@ const branches = ['main', 'v2-compat']
 const currentBranch = ref(branches[0])
 const commits = ref(null)
 
-watchEffect(async () => {
+watchEffect(async () => { // 副作用发生期间追踪依赖 即时响应
   // 该 effect 会立即运行，
   // 并且在 currentBranch.value 改变时重新运行
   const url = `${API_URL}${currentBranch.value}`

@@ -4,7 +4,7 @@
   <TodoList /> -->
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
-  <WatchEffectDemo />
+  <TemplateRefs />
 </template>
 
 
@@ -16,8 +16,8 @@
 // import Second from "@/components/Second.vue";
 
 // import LifeCycle from './components/LifeCycle.vue'
-import WatchEffectDemo  from './components/WatchEffectDemo.vue'
-
+// import WatchEffectDemo  from './components/WatchEffectDemo.vue'
+import TemplateRefs from './components/TemplateRefs.vue'
 
 </script>
 <style></style>
