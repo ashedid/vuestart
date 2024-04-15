@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 
 const todos = ref([
@@ -18,6 +18,11 @@ const todos = ref([
 ])
 let nextTodoId = todos.value.length + 1
 const newTodoText = ref('')
+let inputRef = ref(null);
+
+onMounted(() => {
+  inputRef.value.focus()
+})
 
 function addNewTodo() {
   todos.value.push({id: nextTodoId++, title: newTodoText.value})
@@ -29,14 +34,15 @@ function addNewTodo() {
 <template>
   <el-form @submit.prevent="addNewTodo">
     <!--    <label for="new-todo">Add a todo</label>-->
-    <el-input style="max-width: 480px" v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat"/>
+    <el-input ref="inputRef" style="max-width: 480px" v-model="newTodoText" id="new-todo"
+              placeholder="E.g. Feed the cat"/>
 
     <el-button style="margin-left: 4px" type="primary" @click="addNewTodo">Add</el-button>
   </el-form>
 
   <el-card style="max-width: 480px">
 
-    <p  class="todo-item" v-for="(todo, index) in todos" :key="todo.id" :title="todo.title"> {{ todo.title }}
+    <p class="todo-item" v-for="(todo, index) in todos" :key="todo.id" :title="todo.title"> {{ todo.title }}
       <el-button @click="todos.splice(index, 1)">Remove</el-button>
     </p>
     <!--    <template #footer>Footer content</template>-->
@@ -49,4 +55,5 @@ function addNewTodo() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}</style>
+}
+</style>
