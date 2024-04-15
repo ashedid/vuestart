@@ -141,7 +141,7 @@ function getUndoneTodos() {
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="deleteTodo(todo, index)">Remove</el-button>
+      <el-button @click="deleteTodo(todo)">Remove</el-button>
 
     </p>
     <!--    <template #footer>Footer content</template>-->
@@ -168,7 +168,7 @@ function getUndoneTodos() {
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="deleteTodo(todo, index)">Remove</el-button>
+      <el-button @click="deleteTodo(todo)">Remove</el-button>
 
 
     </p>
