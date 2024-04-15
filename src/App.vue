@@ -1,15 +1,16 @@
 <template>
   <!-- <First />
   <Second class="active" />  -->
-  <!-- <TodoList /> -->
+  <TodoList />
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
-  <NamedSlot />
+  <!-- <Tabs /> -->
 </template>
 
 
 <script setup>
-// import TodoList from './components/TodoList.vue'
+// import Tabs from './components/Tabs.vue';
+import TodoList from './components/TodoList.vue'
 // import EventDemo from './components/EventDemo.vue';
 // import FormBind from './components/FormBind.vue';
 // import First from "@/components/First.vue";
@@ -22,6 +23,6 @@
 // import Tabs from './components/Tabs.vue'
 // import VModelDemo from './components/VModelWrap.vue'
 // import UserNameWrapper from './components/UserNameWrapper.vue'
-import NamedSlot from './components/NamedSlot.vue'
+// import NamedSlot from './components/NamedSlot.vue'
 </script>
 <style></style>
