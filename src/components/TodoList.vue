@@ -3,7 +3,9 @@ import {onMounted, ref} from "vue";
 import {Finished} from "@element-plus/icons-vue";
 
 
-const todos = ref([
+import {ElMessage} from 'element-plus';
+
+let todos = ref([
   {
     id: 1,
     title: 'Do the dishes',
@@ -41,7 +43,21 @@ function addNewTodo() {
     return
   }
   todos.value.push({id: nextTodoId++, title: newTodoText.value, date: date.value, done: false, deleted: false})
+  ElMessage({
+    message: 'New todo ' + newTodoText.value + ' added successfully',
+    type: 'success',
+  });
+
   newTodoText.value = ''
+}
+
+function deleteTodo(todo, index) {
+  todos.value.splice(index, 1);
+  console.log(todo)
+  ElMessage({
+    message: 'todo [' + todo.title + '] deleted successfully',
+    type: 'success',
+  });
 }
 
 // function clearChecked() {
@@ -100,7 +116,7 @@ function getUndoneTodos() {
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="todos.splice(index, 1)">Remove</el-button>
+      <el-button @click="deleteTodo(todo,index)">Remove</el-button>
 
     </p>
     <!--    <template #footer>Footer content</template>-->
@@ -127,7 +143,7 @@ function getUndoneTodos() {
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="todos.splice(index, 1)">Remove</el-button>
+      <el-button @click="deleteTodo(todo,index)">Remove</el-button>
 
     </p>
   </el-card>
