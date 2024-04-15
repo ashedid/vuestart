@@ -7,7 +7,7 @@ import {ElMessage} from 'element-plus';
 
 let todos = ref([
   {
-    id: 1,
+    id: '1',
     title: 'Do the dishes',
     date: '2021/09/01',
     done: false,
@@ -15,14 +15,14 @@ let todos = ref([
 
   },
   {
-    id: 2,
+    id: '2',
     title: 'Take out the trash',
     date: '2021/09/02',
     done: false,
     deleted: false
   },
   {
-    id: 3,
+    id: '3',
     title: 'Mow the lawn',
     date: '2021/09/03',
     done: false,
@@ -40,6 +40,10 @@ onMounted(() => {
 function addNewTodo() {
   if (date.value === '') {
     alert('Please pick a day')
+    return
+  }
+  if (newTodoText.value === '') {
+    alert('Please input a todo')
     return
   }
   todos.value.push({id: nextTodoId++, title: newTodoText.value, date: date.value, done: false, deleted: false})
@@ -67,6 +71,19 @@ function deleteTodo(todo, index) {
 function reverseDone(todo) {
   todo.done = !todo.done
 
+  console.log(todo)
+  if (todo.done) {
+    ElMessage({
+      message: 'todo [' + todo.title + '] done successfully',
+      type: 'success',
+    });
+  } else {
+    ElMessage({
+      message: 'todo [' + todo.title + '] undone successfully',
+      type: 'success',
+    });
+  }
+
 }
 
 function getDoneTodos() {
@@ -86,18 +103,17 @@ function getUndoneTodos() {
     </el-icon>
     <el-text size="large" tag="b" class="mx-1 head-text" type="primary">To Do</el-text>
   </div>
-  <el-form @submit.prevent="addNewTodo" class="form-warp">
+  <el-form id="main-form" @submit.prevent="addNewTodo" class="form-warp">
     <!--    <label for="new-todo">Add a todo</label>-->
 
 
-    <el-date-picker style="max-width: 160px;margin-right: 4px"
-                    value-format="YYYY/MM/DD"
-                    v-model="date"
-                    type="date"
+    <el-date-picker style="max-width: 160px;margin-right: 4px" value-format="YYYY/MM/DD" v-model="date" type="date"
                     placeholder="Pick a day"/>
     <el-input ref="inputRef" style="max-width: 320px" v-model="newTodoText" id="new-todo"
               placeholder="to thine own self be true"/>
-    <el-button style="margin-left: 4px" type="primary" @click="addNewTodo">Add</el-button>
+    <el-tooltip class="box-item" effect="light" content="click to add" placement="right">
+      <el-button style="margin-left: 4px" type="primary" @click="addNewTodo">Add</el-button>
+    </el-tooltip>
 
   </el-form>
 
@@ -108,15 +124,14 @@ function getUndoneTodos() {
       </div>
     </template>
     <div v-if="!getUndoneTodos(todos).length">nothing to do, enjoy your day ^_^</div>
-    <p class="todo-item" v-for="(todo, index) in getUndoneTodos(todos) " :key="todo.id"
-       :title="todo.title">
-      <el-checkbox @change="reverseDone(todo)" v-model="todo.done" :label="todo.title" size="large"/>
+    <p class="todo-item" v-for="(todo, index) in getUndoneTodos(todos) " :key="todo.id" :title="todo.title">
+      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title" size="large"/>
 
 
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="deleteTodo(todo,index)">Remove</el-button>
+      <el-button @click="deleteTodo(todo, index)">Remove</el-button>
 
     </p>
     <!--    <template #footer>Footer content</template>-->
@@ -135,15 +150,15 @@ function getUndoneTodos() {
     </template>
     <div v-if="!getDoneTodos(todos).length">You're new. Not much of a rind on you.</div>
 
-    <p class="todo-item" v-for="(todo, index) in getDoneTodos(todos) " :key="todo.id"
-       :title="todo.title">
-      <el-checkbox @change="reverseDone(todo)" v-model="todo.done" :label="todo.title" size="large"/>
-
+    <p class="todo-item" v-for="(todo, index) in getDoneTodos(todos) " :key="todo.id" :title="todo.title">
+      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title" size="large"/>
+      <!-- v-model="todo.done" 双向数据绑定 checkbox的v-model绑定勾选状态 -->
 
       <span>{{ todo.date }}</span>
 
 
-      <el-button @click="deleteTodo(todo,index)">Remove</el-button>
+      <el-button @click="deleteTodo(todo, index)">Remove</el-button>
+
 
     </p>
   </el-card>
