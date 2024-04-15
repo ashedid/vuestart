@@ -1,7 +1,7 @@
 <template>
   <!-- <First />
   <Second class="active" />  -->
-  <TodoList />
+  <TodoDemo />
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
   <!-- <Tabs /> -->
@@ -10,7 +10,9 @@
 
 <script setup>
 // import Tabs from './components/Tabs.vue';
-import TodoList from './components/TodoList.vue'
+// import TodoList from './components/TodoList.vue'
+
+import TodoDemo from './components/TodoDemo.vue';
 // import EventDemo from './components/EventDemo.vue';
 // import FormBind from './components/FormBind.vue';
 // import First from "@/components/First.vue";
