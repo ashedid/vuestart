@@ -55,8 +55,9 @@ function addNewTodo() {
   newTodoText.value = ''
 }
 
-function deleteTodo(todo, index) {
-  todos.value.splice(index, 1);
+function deleteTodo(todo) {
+
+  todos.value.splice(indexToDelete(todos, todo.id), 1);
   console.log(todo)
   ElMessage({
     message: 'todo [' + todo.title + '] deleted successfully',
@@ -83,6 +84,14 @@ function reverseDone(todo) {
       type: 'success',
     });
   }
+
+}
+
+function indexToDelete(todos, todoId) {
+
+
+  return todos.value.findIndex(todo => todo.id === todoId)
+
 
 }
 
@@ -125,7 +134,8 @@ function getUndoneTodos() {
     </template>
     <div v-if="!getUndoneTodos(todos).length">nothing to do, enjoy your day ^_^</div>
     <p class="todo-item" v-for="(todo, index) in getUndoneTodos(todos) " :key="todo.id" :title="todo.title">
-      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title" size="large"/>
+      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title+'index: '+index"
+                   size="large"/>
 
 
       <span>{{ todo.date }}</span>
@@ -151,7 +161,8 @@ function getUndoneTodos() {
     <div v-if="!getDoneTodos(todos).length">You're new. Not much of a rind on you.</div>
 
     <p class="todo-item" v-for="(todo, index) in getDoneTodos(todos) " :key="todo.id" :title="todo.title">
-      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title" size="large"/>
+      <el-checkbox @change="reverseDone(todo)" :id="todo.id" :value="todo.done" :label="todo.title+'index: '+index"
+                   size="large"/>
       <!-- v-model="todo.done" 双向数据绑定 checkbox的v-model绑定勾选状态 -->
 
       <span>{{ todo.date }}</span>
