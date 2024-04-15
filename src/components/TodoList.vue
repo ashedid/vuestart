@@ -133,7 +133,7 @@ function getUndoneTodos() {
 
       </div>
     </template>
-    <div v-if="!getDoneTodos(todos).length">You're new. Not much of a rind on you</div>
+    <div v-if="!getDoneTodos(todos).length">You're new. Not much of a rind on you.</div>
 
     <p class="todo-item" v-for="(todo, index) in getDoneTodos(todos) " :key="todo.id"
        :title="todo.title">
