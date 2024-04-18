@@ -3,7 +3,7 @@ const routes = [
     {
         path: '/home',
         name: 'Home',
-        // 异步加载，打包时代码分割，性能优化
+        // async load, performance improves
         component: () => import('@/views/Home.vue')
     },
     {
@@ -25,10 +25,33 @@ const routes = [
         name: "history",
         component: () => import("@/views/User.vue")
     },
+    {
+        path: "/vip",
+        component: () => import("@/views/vip.vue"),
+        children: [
+            {
+                path: '',
+                component: () => import("@/views/Default.vue")
+            },
+            {
+                path: 'order',
+                component: () => import("@/views/Order.vue")
+            },
+            {
+                path: 'info',
+                component: () => import("@/views/Info.vue")
+            }
+        ]
+    },
+    {
+        path: "/svip",
+        // redirect: "/vip"
+        redirect: { name: 'history', params: { id: '100', name: 'David' } }
+    },
 ]
 
 const router = createRouter({
-    history: createWebHistory(), // 路由模式：history模式
+    history: createWebHistory(),
     routes: routes
 })
 

@@ -17,6 +17,7 @@ const goTo = () => {
         <hr>
         <router-link to="/content?id=100&title=sssss">query params</router-link> <br>
         <router-link to="/user/007/name/sck/age/24">path params</router-link> <br>
+        <router-link to="/vip">vip</router-link> <br>
 
 
         <router-link :to="{ path: '/content', query: { id: 200, title: 's', age: 24 } }">dynamic query by
