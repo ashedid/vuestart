@@ -6,38 +6,35 @@
   <!-- <FormBind /> -->
   <!-- <Tabs /> -->
   <div class="container">
-    <h1> header </h1>
 
+    <TodoList />
 
+    <!-- <h1> header </h1>
     {{ webStore.web.url }}
 
-    {{ webStore.users }}
 
-    <button @click="webStore.userAdd">add user count</button>
+    
+    {{ webStore.users }} -->
+    <!-- <button @click="webStore.userAdd">add user count</button>
     <hr>
     <router-link to="/home" style="margin-right: 10px;">home</router-link>
     <router-link to="/about">about</router-link>
-
-
-
+ -->
     <!-- <router-link :to="{ name: 'Home' }" style="margin-right: 10px;">home</router-link>
     <router-link :to="{ name: `About` }">about</router-link> -->
-
-
-
     <hr>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 
 </template>
-
-
 <script setup>
-import { useWebStore } from './web.js'
-const webStore = useWebStore()
+import TodoList from './components/TodoList.vue';
 
-console.log("webStore.web:", webStore.web)
-console.log("webStore.users:", webStore.users)
+// import { useWebStore } from './web.js'
+// const webStore = useWebStore()
+
+// console.log("webStore.web:", webStore.web)
+// console.log("webStore.users:", webStore.users)
 // import Tabs from './components/Tabs.vue';
 // import TodoList from './components/TodoList.vue'
 

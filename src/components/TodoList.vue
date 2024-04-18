@@ -1,6 +1,7 @@
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, inject } from "vue";
 // import {Finished} from "@element-plus/icons-vue";
+const axios = inject('$axios')
 
 
 import { ElMessage } from 'element-plus';
@@ -37,7 +38,6 @@ const date = ref('')
 onMounted(() => {
     inputRef.value.focus()
 })
-
 function addNewTodo() {
     if (date.value === '') {
         alert('Please pick a day')
@@ -185,6 +185,8 @@ function getUndoneTodos() {
 
         </p>
     </el-card>
+
+    <el-button @click="req">req</el-button>
 </template>
 
 <style scoped>

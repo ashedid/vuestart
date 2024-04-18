@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
-        path: '/home',
-        name: 'Home',
+        path: '/',
+        name: 'todolist',
         // async load, performance improves
-        component: () => import('@/views/Home.vue')
+        component: () => import('@/components/TodoList.vue')
     },
     {
         path: "/content",
