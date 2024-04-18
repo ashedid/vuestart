@@ -7,6 +7,14 @@
   <!-- <Tabs /> -->
   <div class="container">
     <h1> header </h1>
+
+
+    {{ webStore.web.url }}
+
+    {{ webStore.users }}
+
+    <button @click="webStore.userAdd">add user count</button>
+    <hr>
     <router-link to="/home" style="margin-right: 10px;">home</router-link>
     <router-link to="/about">about</router-link>
 
@@ -25,6 +33,11 @@
 
 
 <script setup>
+import { useWebStore } from './web.js'
+const webStore = useWebStore()
+
+console.log("webStore.web:", webStore.web)
+console.log("webStore.users:", webStore.users)
 // import Tabs from './components/Tabs.vue';
 // import TodoList from './components/TodoList.vue'
 
