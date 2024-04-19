@@ -6,39 +6,36 @@ const axios = inject('$axios')
 
 import { ElMessage } from 'element-plus';
 
-const todos = ref([
-    {
-        id: '1',
-        title: 'eat',
-        date: '2021/09/01',
-        done: false,
-        deleted: false
-
-    },
-    {
-        id: '2',
-        title: 'sleep',
-        date: '2021/09/02',
-        done: false,
-        deleted: false
-    },
-    {
-        id: '3',
-        title: 'dream',
-        date: '2021/09/03',
-        done: false,
-        deleted: false
-    }
-])
+const todos = ref([])
 
 let nextTodoId = todos.value.length.toString() + 1
 const newTodoText = ref('')
 let inputRef = ref(null);
 const date = ref('')
-onMounted(() => {
+onMounted(async () => {
+    // try {
+    //     const response = await fetch('http://localhost:3000/data')
+    //     todos.value = await response.json()
+    //     console.log(todos.value)
+    //   } catch (error) {
+    //     console.error('Error fetching todos:', error)
+    //   }
+    try {
+        const response = await axios.get('http://localhost:3000/data')
+        todos.value = response.data
+        console.log(response)
+    } catch (error) {
+        console.error('Error fetching todos:', error)
+    }
+
+
+
     inputRef.value.focus()
+
+
 })
 function addNewTodo() {
+    console.log(nextTodoId)
     if (date.value === '') {
         alert('Please pick a day')
         return
@@ -48,6 +45,10 @@ function addNewTodo() {
         return
     }
     todos.value.push({ id: (nextTodoId++).toString(), title: newTodoText.value, date: date.value, done: false, deleted: false })
+    console.log(axios.post('http://localhost:3000/data', { id: (nextTodoId++).toString(), title: newTodoText.value, date: date.value, done: false, deleted: false }))
+
+
+
     ElMessage({
         message: 'New todo ' + newTodoText.value + ' added successfully',
         type: 'success',
@@ -55,11 +56,14 @@ function addNewTodo() {
 
     newTodoText.value = ''
     inputRef.value.focus()
+    console.log(nextTodoId)
+
 }
-
 function deleteTodo(todo) {
+    todo.deleted = true
+    // todos.value.splice(indexToDelete(todos, todo.id), 1);
+    console.log(axios.patch('http://localhost:3000/data/' + todo.id, { deleted: true }))
 
-    todos.value.splice(indexToDelete(todos, todo.id), 1);
     // console.log(todo)
     ElMessage({
         message: 'todo [' + todo.title + '] deleted successfully',
@@ -72,24 +76,22 @@ function deleteTodo(todo) {
 // }
 
 function reverseDone(todo) {
-    // todo.done = !todo.done
 
-    console.log(todo)
-    // console.log(todo)
-    if (todo.done) {
 
-        ElMessage({
-            message: 'todo [' + todo.title + '] done successfully',
-            type: 'success',
+    axios.patch(`http://localhost:3000/data/${todo.id}`, { done: todo.done })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
         });
-    } else {
-        ElMessage({
-            message: 'todo [' + todo.title + '] undone successfully',
-            type: 'success',
-        });
-    }
-
+    ElMessage({
+        message: 'todo [' + todo.title + '] ' + (todo.done ? 'done' : 'undone') + ' successfully',
+        type: 'success',
+    });
 }
+
+
 
 function indexToDelete(todos, todoId) {
 
@@ -100,11 +102,11 @@ function indexToDelete(todos, todoId) {
 }
 
 function getDoneTodos() {
-    return todos.value.filter(todo => todo.done === true)
+    return todos.value.filter(todo => todo.done === true && !todo.deleted)
 }
 
 function getUndoneTodos() {
-    return todos.value.filter(todo => todo.done === false)
+    return todos.value.filter(todo => todo.done === false && !todo.deleted)
 }
 
 // const getDoneTodos = computed(() => {
@@ -113,7 +115,7 @@ function getUndoneTodos() {
 // const getUndoneTodos = computed(() => {
 //   return todos.value.filter(todo => todo.done === false)
 // })
-
+console.log(nextTodoId)
 </script>
 
 <template>
@@ -145,8 +147,10 @@ function getUndoneTodos() {
             </div>
         </template>
         <div v-if="!getUndoneTodos(todos).length">nothing to do, enjoy your day ^_^</div>
-        <p class="todo-item" v-for="todo in getUndoneTodos(todos) " :key="todo.id" :title="todo.title">
-            <el-checkbox @input="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" />
+        <p v-for="(todo) in todos" v-show="!todo.deleted & !todo.done" :key="todo.id" :title="todo.title">
+        <div class="todo-item">
+
+            <el-checkbox @change="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" />
             <!-- <el-checkbox @change="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" size="large" /> -->
 
 
@@ -154,39 +158,40 @@ function getUndoneTodos() {
 
 
             <el-button @click="deleteTodo(todo)">Remove</el-button>
+        </div>
 
         </p>
-        <!--    <template #footer>Footer content</template>-->
 
-        <!--    <el-button v-if="todos.length" style="float: right;margin-bottom: 6px"-->
-        <!--               type="danger" @click="clearChecked">-->
-        <!--      clear checked-->
-        <!--    </el-button>-->
+
     </el-card>
-    <el-card style="max-width: 480px">
+
+
+    <el-card style="max-width: 480px" class="up-card">
         <template #header>
             <div class="card-header">
                 <span>History</span>
-
             </div>
         </template>
-        <div v-if="!getDoneTodos(todos).length">You're new. Not much of a rind on you.</div>
+        <div v-if="!getDoneTodos(todos).length">you're new.</div>
+        <p v-for="(todo) in todos" v-show="!todo.deleted && todo.done" :key="todo.id" :title="todo.title">
+        <div class="todo-item">
 
-        <p class="todo-item" v-for="todo in getDoneTodos(todos).reverse() " :key="todo.id" :title="todo.title">
-            <el-checkbox @input="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" />
+            <el-checkbox @change="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" />
             <!-- <el-checkbox @change="reverseDone(todo)" :id="todo.id" v-model="todo.done" :label="todo.title" size="large" /> -->
-            <!-- v-model="todo.done" 双向数据绑定 checkbox的v-model绑定勾选状态 -->
+
 
             <span>{{ todo.date }}</span>
 
 
             <el-button @click="deleteTodo(todo)">Remove</el-button>
-
+        </div>
 
         </p>
+
+
     </el-card>
 
-    <el-button @click="req">req</el-button>
+
 </template>
 
 <style scoped>

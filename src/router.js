@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
-        path: '/',
+        path: '/todolist',
         name: 'todolist',
         // async load, performance improves
         component: () => import('@/components/TodoList.vue')
@@ -11,9 +11,9 @@ const routes = [
         component: () => import("@/views/Content.vue")
     },
     {
-        path: '/about',
-        name: 'About',
-        component: () => import('@/views/About.vue')
+        path: '/counter',
+        name: 'counter',
+        component: () => import('@/components/ButtonCounts.vue')
     },
     {
         path: '/user/:id/name/:name/age/:age',

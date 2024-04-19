@@ -7,7 +7,7 @@
   <!-- <Tabs /> -->
   <div class="container">
 
-    <TodoList />
+    <Layout />
 
     <!-- <h1> header </h1>
     {{ webStore.web.url }}
@@ -28,7 +28,7 @@
 
 </template>
 <script setup>
-import TodoList from './components/TodoList.vue';
+import Layout from './Layout/Layout.vue';
 
 // import { useWebStore } from './web.js'
 // const webStore = useWebStore()

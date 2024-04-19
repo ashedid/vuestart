@@ -9,7 +9,7 @@ const postFontSize = ref(1)
 <template>
     <h1>Here is a child component!</h1>
     <div :style="{ fontSize: postFontSize + 'em' }">
-        <ButtonCounter v-for="c in counts" :count="c" @enlarge-text="postFontSize += 0.1, console.log(postFontSize)">slot
+        <ButtonCounter v-for="c in counts" :count="c" @enlarge-text="postFontSize += 0.1">slot
             test</ButtonCounter>
 
     </div>
