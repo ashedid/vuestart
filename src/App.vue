@@ -5,26 +5,28 @@
   <!-- <EventDemo /> -->
   <!-- <FormBind /> -->
   <!-- <Tabs /> -->
-  <div class="container">
 
-    <Layout />
 
-    <!-- <h1> header </h1>
+ 
+
+  <!-- <h1> header </h1>
     {{ webStore.web.url }}
 
 
     
     {{ webStore.users }} -->
-    <!-- <button @click="webStore.userAdd">add user count</button>
+  <!-- <button @click="webStore.userAdd">add user count</button>
     <hr>
     <router-link to="/home" style="margin-right: 10px;">home</router-link>
     <router-link to="/about">about</router-link>
  -->
-    <!-- <router-link :to="{ name: 'Home' }" style="margin-right: 10px;">home</router-link>
+  <!-- <router-link :to="{ name: 'Home' }" style="margin-right: 10px;">home</router-link>
     <router-link :to="{ name: `About` }">about</router-link> -->
-    <hr>
-    <!-- <router-view></router-view> -->
-  </div>
+  <!-- <hr> -->
+
+
+    <router-view></router-view>
+
 
 </template>
 <script setup>
