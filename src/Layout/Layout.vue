@@ -1,4 +1,16 @@
-import { router } from 'json-server';
+<script setup>
+
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+
+const route = useRoute();
+
+const breadcrumbs = computed(() => {
+    return route.meta.breadcrumb;
+});
+
+
+</script>
 <template>
     <div class="common-layout">
         <el-container>
@@ -8,8 +20,8 @@ import { router } from 'json-server';
                 <el-menu default-active="1" class="el-menu-vertical-demo">
 
 
-                    <router-link  style="color: blue;text-decoration-line: none" to="/counter">
-                    <el-menu-item index="1">
+                    <router-link style="color: blue;text-decoration-line: none" to="/counter">
+                        <el-menu-item index="1">
 
                             <el-icon>
 
@@ -17,8 +29,8 @@ import { router } from 'json-server';
                             <span>counter</span>
                         </el-menu-item>
                     </router-link>
-                    <router-link  style="color: blue;text-decoration-line: none" to="/todolist">
-                    <el-menu-item index="2">
+                    <router-link style="color: blue;text-decoration-line: none" to="/todolist">
+                        <el-menu-item index="2">
 
 
                             <el-icon>
@@ -30,16 +42,25 @@ import { router } from 'json-server';
                 </el-menu>
             </el-aside>
             <el-container>
+
+
+
                 <el-header>
+
+
+
+
                     <el-breadcrumb separator=">">
-                        <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-                
-                        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+                        <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" :to="item.path">{{
+                            item.name }}</el-breadcrumb-item>
+
                     </el-breadcrumb>
+
+
+
+
+
                 </el-header>
-
-
-
 
 
 

@@ -5,18 +5,22 @@ const routes = [
 
     {
         path: '/',
+        name: 'Home',
         component: () => import('@/Layout/Layout.vue'),
         children: [{
             path: '/todolist',
             name: 'todolist',
             // async load, performance improves
-            component: () => import('@/components/TodoList.vue')
+            component: () => import('@/components/TodoList.vue'),
+            meta: { breadcrumb: [{ name: 'Home', path: '/' }, { name: 'todolist' }] } 
         },
 
         {
             path: '/counter',
             name: 'counter',
-            component: () => import('@/components/ButtonCounts.vue')
+            component: () => import('@/components/ButtonCounts.vue'),
+            meta: { breadcrumb: [{ name: 'Home', path: '/' }, { name: 'counter' }] } 
+
         },
         ]
     }

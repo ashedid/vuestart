@@ -18,21 +18,21 @@
       "id": "3",
       "title": "dream",
       "date": "2021/09/03",
-      "done": true,
+      "done": false,
       "deleted": false
     },
     {
       "id": "4",
       "title": "buy",
       "date": "2021/09/04",
-      "done": true,
+      "done": false,
       "deleted": false
     },
     {
       "id": "5",
       "title": "sell",
       "date": "2021/09/05",
-      "done": true,
+      "done": false,
       "deleted": false
     },
     {
